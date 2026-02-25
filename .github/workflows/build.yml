@@ -25,36 +25,36 @@ jobs:
       - name: Ad-hoc Code Sign AU Plugin
         run: |
           codesign --force --deep --sign - \
-            build/WarmVerb_artefacts/Release/AU/WarmVerb.component
+            build/WarmVerb_artefacts/Release/AU/WarmVerb1.component
           echo "Verifying signature..."
-          codesign -v build/WarmVerb_artefacts/Release/AU/WarmVerb.component
+          codesign -v build/WarmVerb_artefacts/Release/AU/WarmVerb1.component
 
       - name: Ad-hoc Code Sign VST3 Plugin
         run: |
           codesign --force --deep --sign - \
-            build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3
-          codesign -v build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3
+            build/WarmVerb_artefacts/Release/VST3/WarmVerb1.vst3
+          codesign -v build/WarmVerb_artefacts/Release/VST3/WarmVerb1.vst3
 
       - name: Verify Universal Binary
         run: |
           echo "=== AU Architecture ==="
-          file build/WarmVerb_artefacts/Release/AU/WarmVerb.component/Contents/MacOS/WarmVerb
-          lipo -info build/WarmVerb_artefacts/Release/AU/WarmVerb.component/Contents/MacOS/WarmVerb
+          file build/WarmVerb_artefacts/Release/AU/WarmVerb1.component/Contents/MacOS/WarmVerb1
+          lipo -info build/WarmVerb_artefacts/Release/AU/WarmVerb1.component/Contents/MacOS/WarmVerb1
           echo "=== VST3 Architecture ==="
-          file build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3/Contents/MacOS/WarmVerb
+          file build/WarmVerb_artefacts/Release/VST3/WarmVerb1.vst3/Contents/MacOS/WarmVerb1
 
       - name: Verify Bundle Structure
         run: |
           echo "=== AU Bundle Contents ==="
-          ls -la build/WarmVerb_artefacts/Release/AU/WarmVerb.component/Contents/
+          ls -la build/WarmVerb_artefacts/Release/AU/WarmVerb1.component/Contents/
           echo "=== Info.plist validity ==="
-          plutil -lint build/WarmVerb_artefacts/Release/AU/WarmVerb.component/Contents/Info.plist
+          plutil -lint build/WarmVerb_artefacts/Release/AU/WarmVerb1.component/Contents/Info.plist
 
       - name: Install AU and Validate with auval
         run: |
           # Copy to system AU directory
           sudo mkdir -p /Library/Audio/Plug-Ins/Components
-          sudo cp -R build/WarmVerb_artefacts/Release/AU/WarmVerb.component \
+          sudo cp -R build/WarmVerb_artefacts/Release/AU/WarmVerb1.component \
             /Library/Audio/Plug-Ins/Components/
 
           # Kill AudioComponentRegistrar to force rescan
@@ -69,14 +69,14 @@ jobs:
       - name: Upload AU
         uses: actions/upload-artifact@v4
         with:
-          name: WarmVerb.component
-          path: build/WarmVerb_artefacts/Release/AU/WarmVerb.component
+          name: WarmVerb1.component
+          path: build/WarmVerb_artefacts/Release/AU/WarmVerb1.component
 
       - name: Upload VST3
         uses: actions/upload-artifact@v4
         with:
-          name: WarmVerb.vst3
-          path: build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3
+          name: WarmVerb1.vst3
+          path: build/WarmVerb_artefacts/Release/VST3/WarmVerb1.vst3
 
   build-windows:
     runs-on: windows-latest
@@ -94,5 +94,5 @@ jobs:
       - name: Upload VST3
         uses: actions/upload-artifact@v4
         with:
-          name: WarmVerb-Windows.vst3
-          path: build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3
+          name: WarmVerb1-Windows.vst3
+          path: build/WarmVerb_artefacts/Release/VST3/WarmVerb1.vst3
