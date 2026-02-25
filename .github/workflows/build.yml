@@ -17,22 +17,29 @@ jobs:
         run: |
           brew install cmake
 
-      - name: Configure CMake
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Configure CMake (Universal Binary)
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
 
       - name: Build
         run: cmake --build build --config Release
 
+      - name: Verify Universal Binary
+        run: |
+          echo "=== VST3 Architecture ==="
+          file build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3/Contents/MacOS/WarmVerb
+          echo "=== AU Architecture ==="
+          file build/WarmVerb_artefacts/Release/AU/WarmVerb.component/Contents/MacOS/WarmVerb
+
       - name: Upload VST3
         uses: actions/upload-artifact@v4
         with:
-          name: WarmVerb-macOS-VST3
+          name: WarmVerb.vst3
           path: build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3
 
       - name: Upload AU
         uses: actions/upload-artifact@v4
         with:
-          name: WarmVerb-macOS-AU
+          name: WarmVerb.component
           path: build/WarmVerb_artefacts/Release/AU/WarmVerb.component
 
   build-windows:
@@ -51,5 +58,5 @@ jobs:
       - name: Upload VST3
         uses: actions/upload-artifact@v4
         with:
-          name: WarmVerb-Windows-VST3
+          name: WarmVerb-Windows.vst3
           path: build/WarmVerb_artefacts/Release/VST3/WarmVerb.vst3
