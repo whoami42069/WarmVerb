@@ -33,7 +33,7 @@ juce_add_plugin(WarmVerb
     FORMATS VST3 AU Standalone
     VST3_CATEGORIES "Fx" "Reverb"
     AU_MAIN_TYPE "kAudioUnitType_Effect"
-    PRODUCT_NAME "WarmVerb"
+    PRODUCT_NAME "WarmVerb1"
 )
 
 # Generate JuceHeader.h (required for JUCE 8.x)
