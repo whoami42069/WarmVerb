@@ -13,7 +13,7 @@ else()
     FetchContent_Declare(
         JUCE
         GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
-        GIT_TAG        7.0.9
+        GIT_TAG        8.0.4
         GIT_SHALLOW    TRUE
     )
     FetchContent_MakeAvailable(JUCE)
@@ -27,7 +27,7 @@ juce_add_plugin(WarmVerb
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
-    COPY_PLUGIN_AFTER_BUILD TRUE
+    COPY_PLUGIN_AFTER_BUILD FALSE
     PLUGIN_MANUFACTURER_CODE Wvba
     PLUGIN_CODE Wvrb
     FORMATS VST3 AU Standalone
