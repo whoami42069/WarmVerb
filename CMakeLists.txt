@@ -36,6 +36,9 @@ juce_add_plugin(WarmVerb
     PRODUCT_NAME "WarmVerb"
 )
 
+# Generate JuceHeader.h (required for JUCE 8.x)
+juce_generate_juce_header(WarmVerb)
+
 # Add source files
 target_sources(WarmVerb PRIVATE
     Source/PluginProcessor.cpp
